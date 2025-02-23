@@ -6,7 +6,7 @@ const cinemaController = Router();
 const validator = OpenApiValidatorProvider.getValidator();
 const routeToValidate = 'v1/product/cinema';
 
-cinemaController.get('/movies/retrieve',
+cinemaController.get('/v1/product/cinema/movies/retrieve',
  async (req: Request, res: Response) => {
     CinemaService.getMovies(req, res); 
 });
