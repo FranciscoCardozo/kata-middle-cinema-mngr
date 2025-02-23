@@ -1,5 +1,5 @@
 console.log('start-lambda', 'Iniciando lambda...');
-const app = require('./app').default;
+const app = require('./build/app').default;
 const isInLambda = !!process.env.LAMBDA_TASK_ROOT;
 if (isInLambda) {
     const serverlessExpress = require('aws-serverless-express');
