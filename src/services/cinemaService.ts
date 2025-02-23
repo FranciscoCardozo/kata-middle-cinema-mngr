@@ -68,14 +68,19 @@ export default class CinemaService {
     public static async confirmReservation(req: Request, res: Response){
         try {
             debug('INIT TO: (confirmReservation):...');
+            const customBody = UtilsValidations.mapCustomBody(req.body);
             const roomData = await DynamoService.getItems(constants.dynamo.tables.rooms, {'room_id': req.body.roomId});
-            const customBody = UtilsValidations.mapCustomBody(req.body, roomData.Items);
+            console.log('ROOM DATA', roomData);
             const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
-            console.log('UPDATE BODY', updateReservations);
+            const fullObject = {
+                ...roomData,
+                ...updateReservations
+            };
+            console.log('UPDATE BODY', fullObject);
             console.log('RESERV BODY', reservationToSave);
             await DynamoService.setItems(constants.dynamo.tables.requestTable, reservationToSave);
-            await DynamoService.setItems(constants.dynamo.tables.rooms, updateReservations);
+            await DynamoService.setItems(constants.dynamo.tables.rooms, fullObject);
             res.status(200).send({message: 'Reservation confirmed'});
         } catch (error) {
             res.status(500).send({message: 'Error confirming reservation', error});

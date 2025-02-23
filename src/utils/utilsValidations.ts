@@ -20,13 +20,10 @@ export default class UtilsValidations{
         });
     }
 
-    public static mapCustomBody(reqBody:any, roomRs: any){
-        console.log('Rooms response',roomRs);
+    public static mapCustomBody(reqBody:any){
         return {
             roomId: reqBody.roomId,
-            roomReservations:reqBody.seatsReserved,
-            roomCapacity: roomRs['room_capacity']['S'],
-            roomName: roomRs['room_name']['S']
+            roomReservations:reqBody.seatsReserved
         }
     }
 }
