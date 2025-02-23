@@ -34,6 +34,7 @@ jobs:
         run: |
           cp lambda/index.js build/index.js
           cp -r node_modules build/node_modules
+          cp -r static build/static
 
       - name: Package Lambda
         run: |
