@@ -31,7 +31,7 @@ cinemaController.get(`${routeToValidate}/reservations/retrieve`,
        CinemaService.getReservations(req, res); 
 });
 
-cinemaController.post(`${routeToValidate}/reservations/registry`,
+cinemaController.post(`${routeToValidate}/reservations/schedule`,
     async (req: Request, res: Response) => {
        CinemaService.confirmReservation(req, res); 
 });

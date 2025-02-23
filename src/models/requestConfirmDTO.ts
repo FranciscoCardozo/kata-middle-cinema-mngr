@@ -12,7 +12,7 @@ export default class RequestConfirmDTO {
     public phone?: string;
     public room_id?: string;
     public movie_id?: string;
-    public seatsReserved?: String;
+    public seats_reserved?: String;
 
     constructor(request: any){
             UtilsValidations.assignDefinedProperties(this, request);
