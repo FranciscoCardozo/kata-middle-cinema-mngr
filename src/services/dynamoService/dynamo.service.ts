@@ -33,11 +33,11 @@ export default class DynamoService {
         const params = {
             TableName: tableName,
             Key: {
-                room_id: body.roomId 
+                room_id: body['room_id'] 
             },
             UpdateExpression: 'SET room_reservations = :val1',
             ExpressionAttributeValues: {
-                ':val1': body.roomReservations,
+                ':val1': body['room_reservations'],
             },
             ReturnValues: 'UPDATED_NEW'
         };
