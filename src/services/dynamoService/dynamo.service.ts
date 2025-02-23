@@ -39,7 +39,7 @@ export default class DynamoService {
             },
             UpdateExpression: 'SET room_reservations = :val1',
             ExpressionAttributeValues: {
-                ':val1': body['room_reservations']['S'],
+                ':val1': JSON.parse(body['room_reservations']['S']),
             },
             ReturnValues: 'UPDATED_NEW'
         };
