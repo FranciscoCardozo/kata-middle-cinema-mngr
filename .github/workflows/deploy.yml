@@ -32,13 +32,15 @@ jobs:
 
       - name: Prepare files
         run: |
-          cp lambda/index.js build/index.js
-          cp -r node_modules build/node_modules
-          cp -r static build/static
+          mkdir -p package/build
+          mkdir -p package/static
+          cp lambda/index.js package/build/index.js
+          cp -r node_modules package/build/node_modules
+          cp -r static/* package/static
 
       - name: Package Lambda
         run: |
-          cd build
+          cd package
           zip -r ../lambda.zip *
 
       - name: Configure AWS Credentials
