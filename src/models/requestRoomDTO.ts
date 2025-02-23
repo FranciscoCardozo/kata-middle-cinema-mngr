@@ -19,7 +19,7 @@ export default class RequestRoomDTO {
             'room_id': { S: this.room_id },
             'room_capacity': { N: this.room_capacity },
             'room_name': { S: this.room_name },
-            'room_reservations': { L: this.room_reservations }
+            'room_reservations': { S: this.room_reservations }
         };
 
         return UtilsValidations.removeEmptyElements(dynamoObject);
