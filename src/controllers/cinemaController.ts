@@ -4,7 +4,7 @@ import CinemaService from '../services/cinemaService';
 const cinemaController = Router();
 
 const validator = OpenApiValidatorProvider.getValidator();
-const routeToValidate = 'v1/product/cinema';
+const routeToValidate = '/v1/product/cinema';
 
 cinemaController.get(`${routeToValidate}/movies/retrieve`,
  async (req: Request, res: Response) => {
