@@ -44,6 +44,7 @@ export default class CinemaService {
         try {
             debug('INIT TO: (registryRoom):...');
             const roomToSave = new RequestRoomDTO(req.body).getDynamoObject();
+            debug('Room to save: ', roomToSave);
             await DynamoService.setItems(constants.dynamo.tables.rooms, roomToSave);
             res.status(200).send({message: 'Room registered: ', room: roomToSave.room_id});
         } catch (error) {
