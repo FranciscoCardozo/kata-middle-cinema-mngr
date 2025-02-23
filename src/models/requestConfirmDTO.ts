@@ -4,7 +4,7 @@ import DynamoService from '../services/dynamoService/dynamo.service';
 export default class RequestConfirmDTO {
     
     public uuid: string;
-    public date: number;
+    public date: string;
     public first_name: string;
     public second_name: string;
     public surname: string;
