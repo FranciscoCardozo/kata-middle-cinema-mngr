@@ -17,7 +17,6 @@
     "express": "^4.21.2",
     "express-actuator": "^1.8.4",
     "express-openapi-validate": "^0.6.1",
-    "kata-middle-cinema-mngr": "file:",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
