@@ -19,4 +19,13 @@ export default class UtilsValidations{
             }
         });
     }
+
+    public static mapCustomBody(reqBody:any, roomRs: any){
+        return {
+            roomId: reqBody.roomId,
+            roomReservations:reqBody.seatsReserved,
+            roomCapacity: roomRs['room_capacity'],
+            roomName: roomRs['room_name']
+        }
+    }
 }

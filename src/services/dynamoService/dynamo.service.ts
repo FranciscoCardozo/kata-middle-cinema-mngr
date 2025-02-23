@@ -2,10 +2,10 @@ const { DynamoDBClient, ScanCommand, PutItemCommand, UpdateItemCommand } = requi
 const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
 
 export default class DynamoService {
-    public static async getItems(tableName: string, key?:string) {
+    public static async getItems(tableName: string, key?:any) {
         const params = {
             TableName: tableName,
-            Key: key ? {'PrimaryKey': key} : undefined
+            Key: key ? {...key} : undefined
         };
         const command = new ScanCommand(params);
         return dynamoDb.send(command)
@@ -27,31 +27,5 @@ export default class DynamoService {
             console.log('Error saving item', error);
             throw new Error(error)
         });
-    }
-
-    public static async updateRoomItems(tableName: string, body: any) {
-        console.log('TABLENAME: ', tableName);
-        console.log('BODY: ', body);
-    
-        const params = {
-            TableName: tableName,
-            Key: {
-                room_id: body['room_id']['S']
-            },
-            UpdateExpression: 'SET room_reservations = :val1',
-            ExpressionAttributeValues: {
-                ':val1': { S: '[{"S": 1,"S":2,"S":3,"S":4}]' },
-            },
-            ReturnValues: 'UPDATED_NEW'
-        };
-    
-        console.log('PARAMS: ', params);
-        const command = new UpdateItemCommand(params);
-        return dynamoDb.send(command)
-            .then((data: any) => data)
-            .catch((error: any) => {
-                console.log('Error updating item', error);
-                return Promise.reject(error);
-            });
     }
 }
