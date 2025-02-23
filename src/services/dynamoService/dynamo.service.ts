@@ -10,7 +10,9 @@ export default class DynamoService {
         const command = new ScanCommand(params);
         return dynamoDb.send(command)
         .then((data: any) => data)
-        .catch((error: any) => Promise.reject(error));
+        .catch((error: any) => {
+            throw new Error(error)
+        });
     }
 
     public static async setItems(tableName: string, body?:any) {
@@ -21,6 +23,9 @@ export default class DynamoService {
         const command = new PutItemCommand(params);
         return dynamoDb.send(command)
         .then((data: any) => data)
-        .catch((error: any) => Promise.reject(error));
+        .catch((error: any) => {
+            console.log('Error saving item', error);
+            throw new Error(error)
+        });
     }
 }
