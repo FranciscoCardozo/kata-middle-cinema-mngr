@@ -5,6 +5,7 @@ import debugLib from 'debug';
 import RequestCinemaDTO from '../models/requestCinemaDTO';
 import RequestRoomDTO from '../models/requestRoomDTO';
 import RequestConfirmDTO from '../models/requestConfirmDTO';
+import UtilsValidations from '../utils/utilsValidations';
 
 const debug = debugLib('cinema:service');
 export default class CinemaService {
@@ -56,8 +57,9 @@ export default class CinemaService {
     public static async getReservations(req: Request, res: Response){
         try {
             debug('INIT TO: (getReservations):...');
-            const reservations = await DynamoService.getItems(constants.dynamo.tables.rooms);
-            res.status(200).send(reservations.Items);
+            const roomsList = await DynamoService.getItems(constants.dynamo.tables.rooms);
+            const reservations = UtilsValidations.mapReservationsList(roomsList.Items);
+            res.status(200).send(reservations);
         } catch (error) {
             res.status(500).send({message: 'Error getting reservations', error});
         }

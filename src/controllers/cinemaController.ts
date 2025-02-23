@@ -28,12 +28,12 @@ cinemaController.post(`${routeToValidate}/rooms/registry`,
 
 cinemaController.get(`${routeToValidate}/reservations/retrieve`,
     async (req: Request, res: Response) => {
-       CinemaService.getMovies(req, res); 
+       CinemaService.getReservations(req, res); 
 });
 
 cinemaController.post(`${routeToValidate}/reservations/registry`,
     async (req: Request, res: Response) => {
-       CinemaService.getMovies(req, res); 
+       CinemaService.confirmReservation(req, res); 
 });
 
 export default cinemaController;

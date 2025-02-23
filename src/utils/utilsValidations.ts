@@ -13,4 +13,14 @@ export default class UtilsValidations{
             }
         });
     }
+
+    public static mapReservationsList(roomsResponse: any[]){
+        return roomsResponse.map(room => {
+            return {
+                room_id: room.room_id,
+                room_capacity: room.room_capacity,
+                room_reservations: room.room_reservations === ''? 'No Rooms Reservations': room.room_reservations
+            }
+        });
+    }
 }
