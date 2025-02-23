@@ -30,6 +30,10 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
+      - name: Prepare files
+        run: |
+          mv lambda/index.js index.js
+
       - name: Package Lambda
         run: |
           cd dist
