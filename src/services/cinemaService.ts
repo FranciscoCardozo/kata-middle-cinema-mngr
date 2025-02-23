@@ -8,7 +8,7 @@ export default class CinemaService {
             const movies = await DynamoService.getItems(constants.dynamo.tables.moviesTable);
             res.status(200).send(movies);
         } catch (error) {
-            res.status(500).send({message: 'Error getting movies'});
+            res.status(500).send({message: 'Error getting movies', error});
         }
         
     }
