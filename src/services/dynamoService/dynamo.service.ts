@@ -32,17 +32,19 @@ export default class DynamoService {
     public static async updateRoomItems(tableName: string, body: any) {
         console.log('TABLENAME: ', tableName);
         console.log('BODY: ', body);
+    
         const params = {
             TableName: tableName,
             Key: {
-                room_id: body['room_id']['S'] 
+                room_id: body['room_id']['S']
             },
             UpdateExpression: 'SET room_reservations = :val1',
             ExpressionAttributeValues: {
-                ':val1': JSON.parse(body['room_reservations']['S']),
+                ':val1': { S: '[{"S": 1,"S":2,"S":3,"S":4}]' },
             },
             ReturnValues: 'UPDATED_NEW'
         };
+    
         console.log('PARAMS: ', params);
         const command = new UpdateItemCommand(params);
         return dynamoDb.send(command)
