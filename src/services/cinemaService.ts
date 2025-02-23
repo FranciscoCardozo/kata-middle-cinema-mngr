@@ -74,8 +74,8 @@ export default class CinemaService {
             const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
             const fullObject = {
-                ...updateReservations,
-                ...roomData.Items
+                ...roomData.Items[0],
+                ...updateReservations
             };
             console.log('UPDATE BODY', fullObject);
             console.log('RESERV BODY', reservationToSave);
