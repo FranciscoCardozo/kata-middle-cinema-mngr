@@ -15,9 +15,9 @@ export default class RequestRoomDTO {
     public getDynamoObject(){
         return {
             'room_id': { S: this.room_id },
-            'room_capacity': { S: this.room_capacity },
+            'room_capacity': { N: this.room_capacity },
             'room_name': { S: this.room_name },
-            'room_reservations': { S: this.room_reservations },
+            'room_reservations': { L: this.room_reservations },
         };
     }
 }
