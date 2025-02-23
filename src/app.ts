@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 //app.use(express.static(path.join(__dirname, '../static')));
 
-app.use((_, req: Request, res: Response, next: NextFunction) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
 	console.log(`Petición recibida: ${req.method} ${req.originalUrl}`);
 	next();
   });
