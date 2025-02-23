@@ -22,6 +22,7 @@ export default class CinemaService {
         try {
             const movieToSave = new RequestCinemaDTO(req.body);
             debug('INIT TO: (registryMovie): ', movieToSave);
+            await DynamoService.setItems(constants.dynamo.tables.moviesTable, movieToSave);
             res.status(200).send({message: 'Movie registered'});
         } catch (error) {
             res.status(500).send({message: 'Error registering movie', error});

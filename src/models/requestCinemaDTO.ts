@@ -5,6 +5,7 @@ export default class RequestCinemaDTO {
     public movie_score: string;
     public movie_img_path: string;
     public movie_id: string;
+    public movie_genre: string;
 
     constructor(request: any){
         this.movie_title = request.movieTitle;
@@ -13,5 +14,6 @@ export default class RequestCinemaDTO {
         this.movie_score = request.movieScore;
         this.movie_img_path = request.movieImgPath;
         this.movie_id = request.movieId;
+        this.movie_genre = request.movieGenre;
     }
 }
