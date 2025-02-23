@@ -3,7 +3,7 @@ export default class RequestRoomDTO {
     public room_id: string;
     public room_capacity: number;
     public room_name: string;
-    public room_reservations: number[];
+    public room_reservations: string;
 
     constructor(request: any){
         this.room_id = request.roomId;
@@ -17,7 +17,7 @@ export default class RequestRoomDTO {
             'room_id': { S: this.room_id },
             'room_capacity': { N: this.room_capacity },
             'room_name': { S: this.room_name },
-            'room_reservations': { L: this.room_reservations.map(reservation => ({ N: reservation })) },
+            'room_reservations': { S: this.room_reservations },
         };
     }
 }
