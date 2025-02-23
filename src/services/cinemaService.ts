@@ -12,7 +12,7 @@ export default class CinemaService {
             debug('INIT TO: (getMovies):...');
             const movies = await DynamoService.getItems(constants.dynamo.tables.moviesTable);
             
-            res.status(200).send(movies.items);
+            res.status(200).send(movies);
         } catch (error) {
             res.status(500).send({message: 'Error getting movies', error});
         }
@@ -34,7 +34,7 @@ export default class CinemaService {
         try {
             debug('INIT TO: (getRooms):...');
             const rooms = await DynamoService.getItems(constants.dynamo.tables.rooms);
-            res.status(200).send(rooms.items);
+            res.status(200).send(rooms);
         } catch (error) {
             res.status(500).send({message: 'Error getting rooms', error});
         }
