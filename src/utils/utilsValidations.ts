@@ -21,6 +21,7 @@ export default class UtilsValidations{
     }
 
     public static mapCustomBody(reqBody:any, roomRs: any){
+        console.log('Rooms response',roomRs);
         return {
             roomId: reqBody.roomId,
             roomReservations:reqBody.seatsReserved,

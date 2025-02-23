@@ -69,7 +69,7 @@ export default class CinemaService {
         try {
             debug('INIT TO: (confirmReservation):...');
             const roomData = await DynamoService.getItems(constants.dynamo.tables.rooms, {'room_id': req.body.roomId});
-            const customBody = UtilsValidations.mapCustomBody(req.body, roomData);
+            const customBody = UtilsValidations.mapCustomBody(req.body, roomData.Items);
             const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
             console.log('UPDATE BODY', updateReservations);
