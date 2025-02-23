@@ -16,4 +16,16 @@ export default class RequestCinemaDTO {
         this.movie_id = request.movieId;
         this.movie_genre = request.movieGenre;
     }
+
+    public getDynamoObject(){
+        return {
+            'movie_id': { S: this.movie_id },
+            'movie_title': { S: this.movie_title },
+            'movie_description': { S: this.movie_description },
+            'movie_duration': { S: this.movie_duration },
+            'movie_score': { S: this.movie_score },
+            'movie_img_path': { S: this.movie_img_path },
+            'movie_genre': { S: this.movie_genre }
+        };
+    }
 }

@@ -20,7 +20,7 @@ export default class CinemaService {
 
     public static async registryMovie(req: Request, res: Response){
         try {
-            const movieToSave = new RequestCinemaDTO(req.body);
+            const movieToSave = new RequestCinemaDTO(req.body).getDynamoObject();
             debug('INIT TO: (registryMovie): ', movieToSave);
             await DynamoService.setItems(constants.dynamo.tables.moviesTable, movieToSave);
             res.status(200).send({message: 'Movie registered'});
