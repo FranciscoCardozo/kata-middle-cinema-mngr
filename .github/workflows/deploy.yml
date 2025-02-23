@@ -33,6 +33,7 @@ jobs:
       - name: Prepare files
         run: |
           cp lambda/index.js build/index.js
+          cp -r node_modules build/node_modules
 
       - name: Package Lambda
         run: |
