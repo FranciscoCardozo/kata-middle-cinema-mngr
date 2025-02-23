@@ -4,6 +4,7 @@ import constants from '../utils/constants';
 import debugLib from 'debug';
 import RequestCinemaDTO from '../models/requestCinemaDTO';
 import RequestRoomDTO from '../models/requestRoomDTO';
+import RequestConfirmDTO from '../models/requestConfirmDTO';
 
 const debug = debugLib('cinema:service');
 export default class CinemaService {
@@ -24,7 +25,7 @@ export default class CinemaService {
             const movieToSave = new RequestCinemaDTO(req.body).getDynamoObject();
             debug('INIT TO: (registryMovie): ', movieToSave);
             await DynamoService.setItems(constants.dynamo.tables.moviesTable, movieToSave);
-            res.status(200).send({message: 'Movie registered: ', movie: movieToSave.movie_id});
+            res.status(200).send({message: 'Movie registered: '});
         } catch (error) {
             res.status(500).send({message: 'Error registering movie', error});
         }
@@ -46,9 +47,38 @@ export default class CinemaService {
             const roomToSave = new RequestRoomDTO(req.body).getDynamoObject();
             debug('Room to save: ', roomToSave);
             await DynamoService.setItems(constants.dynamo.tables.rooms, roomToSave);
-            res.status(200).send({message: 'Room registered: ', room: roomToSave.room_id});
+            res.status(200).send({message: 'Room registered: ', room: roomToSave});
         } catch (error) {
             res.status(500).send({message: 'Error registering room', error});
+        }
+    }
+
+    public static async getReservations(req: Request, res: Response){
+        try {
+            debug('INIT TO: (getReservations):...');
+            const reservations = await DynamoService.getItems(constants.dynamo.tables.rooms);
+            res.status(200).send(reservations.Items);
+        } catch (error) {
+            res.status(500).send({message: 'Error getting reservations', error});
+        }
+    }
+
+    public static async confirmReservation(req: Request, res: Response){
+        try {
+            debug('INIT TO: (confirmReservation):...');
+            const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
+            const customBody = {
+                roomId: req.body.roomId,
+                roomReservation: req.body.roomReservation
+            }
+            const updateReservations = new RequestRoomDTO(customBody);
+            debug('UPDATE BODY: ', updateReservations);
+            debug('Reservation to save: ', reservationToSave);
+            await DynamoService.setItems(constants.dynamo.tables.requestTable, reservationToSave);
+            await DynamoService.updateItems(constants.dynamo.tables.rooms,'room_id',reservationToSave);
+            res.status(200).send({message: 'Reservation confirmed'});
+        } catch (error) {
+            res.status(500).send({message: 'Error confirming reservation', error});
         }
     }
 }
