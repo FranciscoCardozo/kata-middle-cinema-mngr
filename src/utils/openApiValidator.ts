@@ -8,8 +8,7 @@ export default class OpenApiValidatorProvider {
 			'../../static/api.json');
 		const openApiSpecification = fs.readFileSync(openApiSpecificationFile, 'utf-8');
 		const openApiDocument = JSON.parse(openApiSpecification);
-		//return new OpenApiValidator(openApiDocument);
-		return true;
+		return new OpenApiValidator(openApiDocument);
 	}
 }
 
