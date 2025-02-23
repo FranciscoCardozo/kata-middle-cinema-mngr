@@ -12,11 +12,12 @@ export default class RequestRoomDTO {
         this.room_capacity = request.roomCapacity;
         this.room_name = request.roomName;
         this.room_reservations = request.roomReservation;
-        UtilsValidations.assignDefinedProperties(this);
     }
 
     public getDynamoObject(){
-        return Object.entries(this).map(([key, value]) => {
+        return Object.entries(this)
+        .filter(([_, value]) => value !== undefined)
+        .map(([key, value]) => {
             return UtilsValidations.validationMapper(key, value);
         });
     }

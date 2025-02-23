@@ -26,11 +26,12 @@ export default class RequestConfirmDTO {
             this.room_id = request.roomId;
             this.movie_id = request.movieId;
             this.seats_reserved = request.seatsReserved;
-            UtilsValidations.assignDefinedProperties(this);
         }
     
     public getDynamoObject(){
-        return Object.entries(this).map(([key, value]) => {
+        return Object.entries(this)
+        .filter(([_, value]) => value !== undefined)
+        .map(([key, value]) => {
             return UtilsValidations.validationMapper(key, value);
         });
     }

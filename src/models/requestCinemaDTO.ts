@@ -17,11 +17,12 @@ export default class RequestCinemaDTO {
         this.movie_img_path = request.movieImgPath;
         this.movie_id = request.movieId;
         this.movie_genre = request.movieGenre;
-        UtilsValidations.assignDefinedProperties(this);
     }
     
     public getDynamoObject(){
-        return Object.entries(this).map(([key, value]) => {
+        return Object.entries(this)
+        .filter(([_, value]) => value !== undefined)
+        .map(([key, value]) => {
             return UtilsValidations.validationMapper(key, value);
         });
     }
