@@ -15,7 +15,18 @@ export default class RequestConfirmDTO {
     public seats_reserved?: String;
 
     constructor(request: any){
-            UtilsValidations.assignDefinedProperties(this, request);
+            this.uuid = request.uuid;
+            this.date = request.date;
+            this.first_name = request.firstName;
+            this.second_name = request.secondName;
+            this.surname = request.surname;
+            this.second_surname = request.secondSurname;
+            this.email = request.email;
+            this.phone = request.phone;
+            this.room_id = request.roomId;
+            this.movie_id = request.movieId;
+            this.seats_reserved = request.seatsReserved;
+            UtilsValidations.assignDefinedProperties(this);
         }
     
     public getDynamoObject(){

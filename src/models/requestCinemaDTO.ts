@@ -10,7 +10,14 @@ export default class RequestCinemaDTO {
     public movie_genre?: string;
 
     constructor(request: any){
-        UtilsValidations.assignDefinedProperties(this, request);
+        this.movie_description = request.movieDescription;
+        this.movie_duration = request.movieDuration;
+        this.movie_title = request.movieTitle;
+        this.movie_score = request.movieScore;
+        this.movie_img_path = request.movieImgPath;
+        this.movie_id = request.movieId;
+        this.movie_genre = request.movieGenre;
+        UtilsValidations.assignDefinedProperties(this);
     }
     
     public getDynamoObject(){

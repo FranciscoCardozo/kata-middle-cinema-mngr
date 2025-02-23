@@ -6,8 +6,8 @@ export default class UtilsValidations{
         return { [key]: { S: value.toString() } };
     }
 
-    public static assignDefinedProperties(instance: any, object: any) {
-        Object.entries(object).forEach(([key, value]) => {
+    public static assignDefinedProperties(instance: any) {
+        Object.entries(this).forEach(([key, value]) => {
             if (value !== undefined) {
                 instance[key] = value;
             }

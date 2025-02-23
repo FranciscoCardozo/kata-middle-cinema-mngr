@@ -8,7 +8,11 @@ export default class RequestRoomDTO {
     public room_reservations?: string;
 
     constructor(request: any){
-        UtilsValidations.assignDefinedProperties(this, request);
+        this.room_id = request.roomId;
+        this.room_capacity = request.roomCapacity;
+        this.room_name = request.roomName;
+        this.room_reservations = request.roomReservation;
+        UtilsValidations.assignDefinedProperties(this);
     }
 
     public getDynamoObject(){
