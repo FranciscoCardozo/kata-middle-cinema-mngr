@@ -1,5 +1,5 @@
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const { DynamoDBClient, ScanCommand } = require('@aws-sdk/client-dynamodb');
+const dynamoDb = new DynamoDBClient({ region: 'us-east-1' });
 
 export default class DynamoService {
     public static async getItems(tableName: string, key?:string) {
@@ -7,6 +7,7 @@ export default class DynamoService {
             TableName: tableName,
             Key: key ? {'PrimaryKey': key} : undefined
         };
-        return dynamoDb.scan(params).promise();
+        const command = new ScanCommand(params);
+        return dynamoDb.send(command).promise();
     }
 }
