@@ -1,4 +1,4 @@
-import express, { NextFunction, Response } from 'express'; // NOSONAR
+import express, { NextFunction, Response, Request } from 'express'; // NOSONAR
 import logger from 'morgan';
 import path from 'path';
 import cinemaController from './controllers/cinemaController';
@@ -11,7 +11,12 @@ const fullApiPathV1 = `/V1/Product/cinema`;
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../static')));
+//app.use(express.static(path.join(__dirname, '../static')));
+
+app.use((_, req: Request, res: Response, next: NextFunction) => {
+	console.log(`Petición recibida: ${req.method} ${req.originalUrl}`);
+	next();
+  });
 
 app.use((_, res: Response, next: NextFunction) => {
 	res.header('Access-Control-Allow-Origin', '*'); // NOSONAR
@@ -20,6 +25,6 @@ app.use((_, res: Response, next: NextFunction) => {
 	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
 	next();
 });
-app.use(fullApiPathV1, cinemaController);
+app.use(cinemaController);
 
 export default app;
