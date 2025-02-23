@@ -25,8 +25,8 @@ export default class UtilsValidations{
         return {
             roomId: reqBody.roomId,
             roomReservations:reqBody.seatsReserved,
-            roomCapacity: roomRs['room_capacity'],
-            roomName: roomRs['room_name']
+            roomCapacity: roomRs['room_capacity']['S'],
+            roomName: roomRs['room_name']['S']
         }
     }
 }
