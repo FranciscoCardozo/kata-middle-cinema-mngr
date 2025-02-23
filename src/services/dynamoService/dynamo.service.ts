@@ -29,39 +29,49 @@ export default class DynamoService {
         });
     }
 
-    public static async updateItems(tableName: string, primaryKeyName: string, body: any) {
+    public static async updateItems(tableName: string, primaryKeyName: string, body: { [key: string]: any }) {
         try {
             const key = { [primaryKeyName]: { S: body[primaryKeyName] } };
-        delete body[primaryKeyName];
+            delete body[primaryKeyName];
 
-        const attributes = body;
+            const attributes = body;
 
-        const updateExpression = 'SET ' + Object.keys(attributes).map(attr => `#${attr} = :${attr}`).join(', ');
-        const expressionAttributeNames = Object.keys(attributes).reduce((acc, attr) => {
-            (acc as any)[`#${attr}`] = attr;
-            return acc;
-        }, {});
-        const expressionAttributeValues = Object.keys(attributes).reduce((acc, attr) => {
-            (acc as any)[`:${attr}`] = attributes[attr];
-            return acc;
-        }, {});
+            const updateExpression = 'SET ' + Object.keys(attributes).map(attr => `#${attr} = :${attr}`).join(', ');
+            const expressionAttributeNames = Object.keys(attributes).reduce((acc, attr) => {
+                (acc as any)[`#${attr}`] = attr;
+                return acc;
+            }, {});
+            const expressionAttributeValues = Object.keys(attributes).reduce((acc, attr) => {
+                const value = attributes[attr];
+                if (typeof value === 'string') {
+                    (acc as any)[`:${attr}`] = { S: value };
+                } else if (typeof value === 'number') {
+                    (acc as any)[`:${attr}`] = { N: value.toString() };
+                } else if (Array.isArray(value)) {
+                    (acc as any)[`:${attr}`] = { L: value.map(v => ({ N: v.toString() })) };
+                } else {
+                    (acc as any)[`:${attr}`] = { S: value.toString() };
+                }
+                return acc;
+            }, {});
 
-        const params = {
-            TableName: tableName,
-            Key: key,
-            UpdateExpression: updateExpression,
-            ExpressionAttributeNames: expressionAttributeNames,
-            ExpressionAttributeValues: expressionAttributeValues
-        };
-        const command = new UpdateItemCommand(params);
-        return dynamoDb.send(command)
-            .then((data: any) => data)
-            .catch((error: any) => {
-                console.log('Error updating item', error);
-                return Promise.reject(error);
-            });
+            const params = {
+                TableName: tableName,
+                Key: key,
+                UpdateExpression: updateExpression,
+                ExpressionAttributeNames: expressionAttributeNames,
+                ExpressionAttributeValues: expressionAttributeValues
+            };
+            const command = new UpdateItemCommand(params);
+            return dynamoDb.send(command)
+                .then((data: any) => data)
+                .catch((error: any) => {
+                    console.log('Error updating item', error);
+                    return Promise.reject(error);
+                });
         } catch (error) {
             console.log(error);
+            return Promise.reject(error);
         }
     }
 }
