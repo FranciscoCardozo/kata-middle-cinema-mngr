@@ -30,6 +30,8 @@ export default class DynamoService {
     }
 
     public static async updateRoomItems(tableName: string, body: any) {
+        console.log('TABLENAME: ', tableName);
+        console.log('BODY: ', body);
         const params = {
             TableName: tableName,
             Key: {
@@ -41,6 +43,7 @@ export default class DynamoService {
             },
             ReturnValues: 'UPDATED_NEW'
         };
+        console.log('PARAMS: ', params);
         const command = new UpdateItemCommand(params);
         return dynamoDb.send(command)
             .then((data: any) => data)
