@@ -30,7 +30,8 @@ export default class DynamoService {
     }
 
     public static async updateItems(tableName: string, primaryKeyName: string, body: any) {
-        const key = { [primaryKeyName]: { S: body[primaryKeyName] } };
+        try {
+            const key = { [primaryKeyName]: { S: body[primaryKeyName] } };
         delete body[primaryKeyName];
 
         const attributes = body;
@@ -59,5 +60,8 @@ export default class DynamoService {
                 console.log('Error updating item', error);
                 return Promise.reject(error);
             });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }

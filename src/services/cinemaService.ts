@@ -68,11 +68,11 @@ export default class CinemaService {
     public static async confirmReservation(req: Request, res: Response){
         try {
             debug('INIT TO: (confirmReservation):...');
-            const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const customBody = {
                 roomId: req.body.roomId,
                 roomReservations: req.body.seatsReserved
-            }
+            };
+            const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
             console.log('UPDATE BODY', updateReservations);
             console.log('RESERV BODY', reservationToSave);
