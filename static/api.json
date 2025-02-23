@@ -13,7 +13,7 @@
       }
     } ],
     "paths" : {
-      "/v1/product/cinema/getMovies" : {
+      "/v1/product/cinema/movies/retrieve" : {
         "get" : {
           "responses" : {
             "200" : {
@@ -29,7 +29,7 @@
           }
         }
       },
-      "/v1/product/cinema/getRooms" : {
+      "/v1/product/cinema/rooms/retrieve" : {
         "get" : {
           "responses" : {
             "200" : {
@@ -45,7 +45,7 @@
           }
         }
       },
-      "/v1/product/cinema/getReservations" : {
+      "/v1/product/cinema/reservations/retrieve" : {
         "get" : {
           "responses" : {
             "200" : {
@@ -61,7 +61,7 @@
           }
         }
       },
-      "/v1/product/cinema/registryMovie" : {
+      "/v1/product/cinema/movies/registry" : {
         "post" : {
             "requestBody" : {
                 "description" : "requested body to registry movie",
@@ -97,7 +97,7 @@
           }
         }
       },
-      "/v1/product/cinema/registryRoom" : {
+      "/v1/product/cinema/rooms/registry" : {
         "post" : {
             "requestBody" : {
                 "description" : "requested body to registry movie",
@@ -127,7 +127,7 @@
           }
         }
       },
-      "/v1/product/cinema/schedule" : {
+      "/v1/product/cinema/reservations/schedule" : {
         "post" : {
             "requestBody" : {
                 "description" : "requested body to registry movie",
