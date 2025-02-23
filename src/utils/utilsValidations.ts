@@ -8,8 +8,8 @@ export default class UtilsValidations{
 
     public static assignDefinedProperties(instance: any) {
         Object.entries(this).forEach(([key, value]) => {
-            if (value !== undefined) {
-                instance[key] = value;
+            if (value === undefined) {
+                delete instance[key];
             }
         });
     }
