@@ -74,8 +74,8 @@ export default class CinemaService {
                 roomReservation: req.body.roomReservation
             }
             const updateReservations = new RequestRoomDTO(customBody);
-            debug('UPDATE BODY: ', JSON.stringify(updateReservations));
-            debug('Reservation to save: ', JSON.stringify(reservationToSave));
+            console.log('UPDATE BODY', updateReservations);
+            console.log('RESERV BODY', reservationToSave);
             await DynamoService.setItems(constants.dynamo.tables.requestTable, reservationToSave);
             await DynamoService.updateItems(constants.dynamo.tables.rooms,'room_id',reservationToSave);
             res.status(200).send({message: 'Reservation confirmed'});

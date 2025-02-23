@@ -3,7 +3,6 @@ export default class UtilsValidations{
     public static removeEmptyElements(object: any){
         Object.entries(object).forEach(([key, value]) => {
             Object.entries(value as any).some(([subkey, subvalue]) => {
-                console.log(subvalue, subkey === undefined, key);
                 if (!subvalue) {
                     delete (object as any)[key];
                 }
