@@ -7,7 +7,7 @@ import config from './config';
 const app = express();
 app.disable('x-powered-by');
 const apiPath = config.apiPath;
-const fullApiPathV1 = `${apiPath}/V1/Product/cinema`;
+const fullApiPathV1 = `/V1/Product/cinema`;
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
