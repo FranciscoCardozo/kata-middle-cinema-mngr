@@ -32,11 +32,11 @@ jobs:
 
       - name: Prepare files
         run: |
-          mkdir -p package/build
           mkdir -p package/static
           cp lambda/index.js package/index.js
           cp -r node_modules package/node_modules
           cp -r static/* package/static
+          cp -r build/* package/build
 
       - name: Package Lambda
         run: |
