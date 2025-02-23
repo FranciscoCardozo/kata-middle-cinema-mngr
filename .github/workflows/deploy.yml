@@ -32,7 +32,7 @@ jobs:
 
       - name: Prepare files
         run: |
-          mv lambda/index.js index.js
+          cp lambda/index.js build/index.js
 
       - name: Package Lambda
         run: |
