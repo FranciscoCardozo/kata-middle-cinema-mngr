@@ -20,6 +20,7 @@ export default class RequestCinemaDTO {
     }
     
     public getDynamoObject(){
+        console.log(this);
         return Object.entries(this)
         .filter(([_, value]) => value !== undefined)
         .map(([key, value]) => {

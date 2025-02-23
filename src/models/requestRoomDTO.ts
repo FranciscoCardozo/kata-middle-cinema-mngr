@@ -15,6 +15,7 @@ export default class RequestRoomDTO {
     }
 
     public getDynamoObject(){
+        console.log(this);
         return Object.entries(this)
         .filter(([_, value]) => value !== undefined)
         .map(([key, value]) => {
