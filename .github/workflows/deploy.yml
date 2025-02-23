@@ -36,7 +36,7 @@ jobs:
 
       - name: Package Lambda
         run: |
-          cd dist
+          cd build
           zip -r ../lambda.zip *
 
       - name: Configure AWS Credentials
