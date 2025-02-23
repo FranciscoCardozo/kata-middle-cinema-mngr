@@ -18,12 +18,12 @@ cinemaController.post(`${routeToValidate}/movies/registry`,
 
 cinemaController.get(`${routeToValidate}/rooms/retrieve`,
     async (req: Request, res: Response) => {
-       CinemaService.getMovies(req, res); 
+       CinemaService.getRooms(req, res); 
 });
 
 cinemaController.post(`${routeToValidate}/rooms/registry`,
     async (req: Request, res: Response) => {
-       CinemaService.getMovies(req, res); 
+       CinemaService.registryRoom(req, res); 
 });
 
 cinemaController.get(`${routeToValidate}/reservations/retrieve`,

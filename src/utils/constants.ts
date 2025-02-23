@@ -3,7 +3,7 @@ export default {
         tables: {
             moviesTable: "movies_cinema_table",
             requestTable: "request_cinema_table",
-            rooms: "room1_cinema_table"
+            rooms: "rooms_cinema_table"
         }
     }
 }
