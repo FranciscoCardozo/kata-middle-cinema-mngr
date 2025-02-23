@@ -2,10 +2,10 @@ import UtilsValidations from "../utils/utilsValidations";
 
 export default class RequestRoomDTO {
     
-    public room_id?: string;
-    public room_capacity?: number;
-    public room_name?: string;
-    public room_reservations?: string;
+    public room_id: string;
+    public room_capacity: number;
+    public room_name: string;
+    public room_reservations: string;
 
     constructor(request: any){
         this.room_id = request.roomId;
@@ -15,11 +15,13 @@ export default class RequestRoomDTO {
     }
 
     public getDynamoObject(){
-        console.log(this);
-        return Object.entries(this)
-        .filter(([_, value]) => value !== undefined)
-        .map(([key, value]) => {
-            return UtilsValidations.validationMapper(key, value);
-        });
+        const dynamoObject = {
+            'room_id': { S: this.room_id },
+            'room_capacity': { N: this.room_capacity.toString() },
+            'room_name': { S: this.room_name },
+            'room_reservations': { L: this.room_reservations }
+        };
+
+        return UtilsValidations.removeEmptyElements(dynamoObject);
     }
 }

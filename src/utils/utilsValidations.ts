@@ -1,19 +1,16 @@
 export default class UtilsValidations{
-    public static validationMapper(key: string, value: any) {
-        if (typeof value === "string") return { [key]: { S: value } };
-        if (typeof value === "number") return { [key]: { N: value } };
-        if (Array.isArray(value)) return { [key]: { L: value.map(v => ({ S: v.toString() })) } };
-        return { [key]: { S: value.toString() } };
-    }
 
-    public static assignDefinedProperties(instance: any) {
-        Object.entries(this).forEach(([key, value]) => {
-            if (value === undefined) {
-                delete instance[key];
-            }
+    public static removeEmptyElements(object: any){
+        Object.entries(object).forEach(([key, value]) => {
+            Object.entries(value as any).some(([subkey, subvalue]) => {
+                console.log(subvalue, subkey === undefined, key);
+                if (!subvalue) {
+                    delete (object as any)[key];
+                }
+            });
         });
+        return object;
     }
-
     public static mapReservationsList(roomsResponse: any[]){
         return roomsResponse.map(room => {
             return {

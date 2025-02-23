@@ -1,18 +1,19 @@
 import UtilsValidations from "../utils/utilsValidations";
+import DynamoService from '../services/dynamoService/dynamo.service';
 
 export default class RequestConfirmDTO {
     
-    public uuid?: string;
-    public date?: number;
-    public first_name?: string;
-    public second_name?: string;
-    public surname?: string;
-    public second_surname?: string;
-    public email?: string;  
-    public phone?: string;
-    public room_id?: string;
-    public movie_id?: string;
-    public seats_reserved?: String;
+    public uuid: string;
+    public date: number;
+    public first_name: string;
+    public second_name: string;
+    public surname: string;
+    public second_surname: string;
+    public email: string;  
+    public phone: string;
+    public room_id: string;
+    public movie_id: string;
+    public seats_reserved: String;
 
     constructor(request: any){
             this.uuid = request.uuid;
@@ -29,11 +30,19 @@ export default class RequestConfirmDTO {
         }
     
     public getDynamoObject(){
-        console.log(this);
-        return Object.entries(this)
-        .filter(([_, value]) => value !== undefined)
-        .map(([key, value]) => {
-            return UtilsValidations.validationMapper(key, value);
-        });
+        const dynamoObject = {
+            'uuid': { S: this.uuid },
+            'date': { S: this.date },
+            'first_name': {S: this.first_name},
+            'second_name': {S: this.second_name},
+            'surname': {S: this.surname},
+            'second_surname': {S: this.second_surname},
+            'email': {S: this.email},
+            'phone': {S: this.phone},
+            'room_id': {S: this.room_id},
+            'movie_id': {S: this.movie_id},
+            'seats_reserved': {S: this.seats_reserved}
+        }
+        return UtilsValidations.removeEmptyElements(dynamoObject);
     }
 }
