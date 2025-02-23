@@ -19,7 +19,7 @@ export default class UtilsValidations{
             return {
                 room_id: room.room_id,
                 room_capacity: room.room_capacity,
-                room_reservations: room.room_reservations === ''? 'No Rooms Reservations': room.room_reservations
+                room_reservations: room.room_reservations.length >= 1? room.room_reservations: 'No Room Reservations'
             }
         });
     }
