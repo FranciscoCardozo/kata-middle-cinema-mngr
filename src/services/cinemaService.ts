@@ -70,10 +70,16 @@ export default class CinemaService {
             debug('INIT TO: (confirmReservation):...');
             const customBody = {
                 roomId: req.body.roomId,
+<<<<<<< HEAD
                 roomReservations: req.body.seatsReserved
             };
             const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
+=======
+                roomReservation: req.body.roomReservation
+            }
+            const updateReservations = new RequestRoomDTO(customBody);
+>>>>>>> parent of a99c170 (fix mapping and variables)
             console.log('UPDATE BODY', updateReservations);
             console.log('RESERV BODY', reservationToSave);
             await DynamoService.setItems(constants.dynamo.tables.requestTable, reservationToSave);

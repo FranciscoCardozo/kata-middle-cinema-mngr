@@ -11,7 +11,7 @@ export default class RequestRoomDTO {
         this.room_id = request.roomId;
         this.room_capacity = request.roomCapacity;
         this.room_name = request.roomName;
-        this.room_reservations = request.roomReservations;
+        this.room_reservations = request.roomReservation;
     }
 
     public getDynamoObject(){
@@ -21,6 +21,7 @@ export default class RequestRoomDTO {
             'room_name': { S: this.room_name },
             'room_reservations': { L: this.room_reservations }
         };
+
         return UtilsValidations.removeEmptyElements(dynamoObject);
     }
 }
