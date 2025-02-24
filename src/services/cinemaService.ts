@@ -6,6 +6,7 @@ import RequestCinemaDTO from '../models/requestCinemaDTO';
 import RequestRoomDTO from '../models/requestRoomDTO';
 import RequestConfirmDTO from '../models/requestConfirmDTO';
 import UtilsValidations from '../utils/utilsValidations';
+import NotifyService from './notifyService/notify.service';
 
 const debug = debugLib('cinema:service');
 export default class CinemaService {
@@ -84,6 +85,7 @@ export default class CinemaService {
             console.log('RESERV BODY', reservationToSave);
             await DynamoService.setItems(constants.dynamo.tables.requestTable, reservationToSave);
             await DynamoService.setItems(constants.dynamo.tables.rooms, fullObject);
+            await NotifyService.notifyClient(req.body);
             res.status(200).send({message: 'Reservation confirmed'});
         } catch (error) {
             res.status(500).send({message: 'Error confirming reservation', error});
