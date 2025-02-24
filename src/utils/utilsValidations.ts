@@ -26,4 +26,9 @@ export default class UtilsValidations{
             roomReservations:reqBody.seatsReserved
         }
     }
+
+    public static getReservationHours(currentReservations: any[], newReservation: string){
+        currentReservations.push(newReservation);
+        return currentReservations;
+    }
 }

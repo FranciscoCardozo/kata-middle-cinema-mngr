@@ -13,7 +13,8 @@ export default class RequestConfirmDTO {
     public phone: string;
     public room_id: string;
     public movie_id: string;
-    public seats_reserved: String;
+    public seats_reserved: string;
+    public reservation_hour: string;
 
     constructor(request: any){
             this.uuid = request.uuid;
@@ -27,6 +28,7 @@ export default class RequestConfirmDTO {
             this.room_id = request.roomId;
             this.movie_id = request.movieId;
             this.seats_reserved = request.seatsReserved;
+            this.reservation_hour = request.reservationHour;
         }
     
     public getDynamoObject(){
@@ -41,7 +43,8 @@ export default class RequestConfirmDTO {
             'phone': {S: this.phone},
             'room_id': {S: this.room_id},
             'movie_id': {S: this.movie_id},
-            'seats_reserved': {S: this.seats_reserved}
+            'seats_reserved': {S: this.seats_reserved},
+            'reservation_hour': {S: this.reservation_hour}
         }
         return UtilsValidations.removeEmptyElements(dynamoObject);
     }

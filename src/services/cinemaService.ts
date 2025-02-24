@@ -73,9 +73,12 @@ export default class CinemaService {
             console.log('ROOM DATA', roomData.Items);
             const reservationToSave = new RequestConfirmDTO(req.body).getDynamoObject();
             const updateReservations = new RequestRoomDTO(customBody).getDynamoObject();
+            const currentReservateHours = JSON.parse(roomData.Items[0]['room_reservate_hours']['S']);
+            const reservations = UtilsValidations.getReservationHours(currentReservateHours, req.body.reservationHour);
             const fullObject = {
                 ...roomData.Items[0],
-                ...updateReservations
+                ...updateReservations,
+                'room_reservate_hours': {S: JSON.stringify(reservations)}
             };
             console.log('UPDATE BODY', fullObject);
             console.log('RESERV BODY', reservationToSave);
