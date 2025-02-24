@@ -19,9 +19,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   });
 
 app.use((_, res: Response, next: NextFunction) => {
-	res.header('Access-Control-Allow-Origin', '*'); // NOSONAR
-	res.header('Access-Control-Allow-Headers', '*'); // NOSONAR
-	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE'); // NOSONAR
 	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
 	next();
 });
