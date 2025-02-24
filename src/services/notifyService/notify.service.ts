@@ -16,6 +16,7 @@ export default class NotifyService{
             },
             Source: "fcardozo199@gmail.com",
         };
+        console.log('params to email:', params);
         try {
             const command = new SendEmailCommand(params);
             const response = await sesClient.send(command);
