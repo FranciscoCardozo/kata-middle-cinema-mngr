@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.751.0",
+    "@aws-sdk/client-ses": "^3.750.0",
     "aws-serverless-express": "^3.4.0",
     "debug": "^4.4.0",
     "express": "^4.21.2",
