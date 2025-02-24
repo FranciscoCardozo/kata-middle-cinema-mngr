@@ -8,7 +8,7 @@ import http from 'http';
 import config from '../config';
 import app from '../app';
 
-const debug = debugLib('bdb:server');
+const debug = debugLib('server');
 debug.enabled = true;
 
 /**
