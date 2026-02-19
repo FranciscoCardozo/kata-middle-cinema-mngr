@@ -11,6 +11,11 @@ cinemaController.get(`${routeToValidate}/movies/retrieve`,
     CinemaService.getMovies(req, res); 
 });
 
+cinemaController.get(`${routeToValidate}/getMovies`,
+ async (req: Request, res: Response) => {
+    CinemaService.getMovies(req, res); 
+});
+
 cinemaController.post(`${routeToValidate}/movies/registry`,
     async (req: Request, res: Response) => {
        CinemaService.registryMovie(req, res); 

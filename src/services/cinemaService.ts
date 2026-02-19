@@ -21,7 +21,7 @@ export default class CinemaService {
         }
         
     }
-
+    
     public static async registryMovie(req: Request, res: Response){
         try {
             const movieToSave = new RequestCinemaDTO(req.body).getDynamoObject();
